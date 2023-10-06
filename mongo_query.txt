@@ -1,0 +1,199 @@
+Database 
+    - it's a place to store and retrieve data
+    - It's a software that's very much optimised to do CRUD+ operations
+
+Why Database? 
+
+
+Types 
+ SQL - Structured Databases
+        - Table, rows, columns      
+        - MySQL, Postgress etc
+        - Rigid/not Flexible
+        - well established, Banks
+        - learning curve is comparatively more
+
+ NoSQL - Flexible Databases
+       - No rigid structure 
+       - MongoDB, Cassandra
+       - Most startups
+       - learning curve is comparatively less
+
+MongoDB
+ - NoSQL Database
+ - Database
+        - Collections
+            - Documents
+ - Queries - Syntax is very similar to Javascript
+
+
+ Key-value Databases
+ - localstorage
+ - Redis
+
+Installation 
+
+
+Queries - 
+
+show dbs - shows all databases
+use dbname - 1) to use that database if it exists 2)Creates a new one if it doesn't exist
+show collections - shows all collections
+
+Create collection - 1) db.createCollection("collection_name") 2) db.collection_name.insert()
+
+
+CRUD
+
+DB - ptu7
+    collection - students
+                documents - 
+
+1) Create -> 
+    db.collection_name.insertOne({})
+    db.collection_name.insertMany([{},{}])
+
+    _id is automatically created by MongoDB
+
+
+2) Read 
+     db.collection_name.findOne()
+     db.collection_name.find()
+     db.collection_name.find({//write the criteria})
+
+Document -> 
+        JSON -> BSON
+        Keys are also called Fields
+
+
+3) Update
+   db.students.updateOne(matching criteria , the updated data)
+
+   db.students.updateOne({name : "Bharat"} , {$set : {city : "chennai"}})
+   db.students.updateMany({name : "Bharat"} , {$set : {city : "chennai"}})
+
+           
+          
+4) Delete
+    db.students.deleteOne({matching criteria})
+
+    Database -> collections -> documents
+
+BSON
+
+field = key
+
+_id  = unix time + random number
+
+1. wherever the gender is male, add a key "random" : "yes"
+
+2. wherever the id is less than 20, I want add 
+group : "super"
+
+    $lt - less than 
+    find({id : {$lt : number}})
+
+    $lte - less than equal
+
+    $gt 
+
+    $gte - 
+
+    $eq - 
+
+    $ne - 
+
+
+    AND - && -  
+    .find({$and : [{},{},{}]})
+
+    OR - || 
+
+
+    limit - limit
+    skip - simply skipping
+
+    
+    for each page, you'll give 5 documents
+
+    /users?page_no=3&&
+
+    page_no = 3
+    per_page = 5
+
+    .skip((page_no-1)*per_page).limit(5)
+
+
+    sort
+     - ascending
+     - descending
+     
+
+CRUD + skip, sort, limiting
+
+filtering
+
+
+//Performance
+
+1. Indexing
+
+Index - 
+
+1000 users
+db.users.find({name : "zim"}) // O(n)
+1000th user in my collection
+
+_id has indexing by default
+
+db.users.find({_id : ObjectId("asdlfkjaldfjadfj")}) // O(1)
+1000th user in my collection
+
+
+MongoDB Compass - GUI
+
+
+Indexing 
+1. _id is indexed by default 
+2. we can index any field as well
+
+Why can't I just index everything?
+
+can - yes
+should we? - No
+What to index? - the field/key which is used most
+
+
+
+Aggregation 
+Aggregate - total/complete/together
+
+Aggregation - most powerful feature of MongoDB
+
+
+
+client - /orders?page_no = 2
+
+1. const all_orders = db.orders.find()
+   const relevant_orders = all_orders.filter(())
+   res.send(relevant_orders)
+
+   OR
+
+2. const relevant_orders = db.orders.find().skip().limit
+    res.send(relevant_orders)
+
+
+   1000
+db.users.aggregate([{$limit : 1},{$sort : {age : 1}},{skip : 2}, {}])
+
+
+
+db.users.aggregate({name : "xyz"}, {sort : {age : 1}}, 
+{skip : 5}, {limit : 2})
+
+
+
+
+//mongodb Compass
+//mongodb Atlas
