@@ -189,9 +189,10 @@ db.users.aggregate([{$limit : 1},{$sort : {age : 1}},{skip : 2}, {}])
 
 
 
-db.users.aggregate({name : "xyz"}, {sort : {age : 1}}, 
-{skip : 5}, {limit : 2})
+db.users.aggregate([{$match : {name : "xyz"}}, {sort : {age : 1}}, 
+{skip : 5}, {limit : 2}])
 
+//search more about mongodb aggregate
 
 
 
